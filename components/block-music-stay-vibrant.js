@@ -50,7 +50,7 @@ const Title = styled.div`
   position: absolute;
   bottom: 9px;
   left: 13px;
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.5rem;
   line-height: 29px;
   color: white;
@@ -70,9 +70,7 @@ export default function Component(props) {
   const [showVideo, setShowVideo] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowVideo(true)
-    }, 500)
+    setShowVideo(true)
   }, [setShowVideo])
 
   return (

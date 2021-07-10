@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400 500 600 700;
+    font-weight: 400 700;
     font-display: optional;
     src: url("/fonts/inter-var-latin.woff2") format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
@@ -37,7 +37,10 @@ const theme = {
 }
 
 export default function App({ Component, pageProps }) {
-  splitbee.init()
+  splitbee.init({
+    scriptUrl: "/bee.js",
+    apiUrl: "/_hive",
+  })
   return (
     <>
       <GlobalStyle />

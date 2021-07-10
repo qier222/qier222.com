@@ -8,6 +8,7 @@ My personal website.
 git clone https://github.com/qier222/qier222.com.git
 cd qier222.com
 npm run install
+cp .env.example .env # then edit .env
 npm run dev
 ```
 

@@ -35,10 +35,7 @@ export default function Component() {
         {albums.map(album => (
           <Album
             key={album.id}
-            artwork={album.artwork_url.replace(
-              "{w}x{h}bb.jpeg",
-              "256x256bb.jpeg"
-            )}
+            artwork={album.artwork_url}
             name={album.name}
             artist={album.artist}
             year={album.release_date.slice(0, 4)}

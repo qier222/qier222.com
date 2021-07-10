@@ -16,7 +16,7 @@ const HeroSection = styled.div`
 
 const Title = styled.div`
   color: hsla(240, 68%, 5%, 1);
-  font-weight: bold;
+  font-weight: 700;
   font-size: 2rem;
   margin-top: 22px;
   margin-left: 2px;

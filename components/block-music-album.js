@@ -12,6 +12,8 @@ const ArtWork = styled.img`
   width: 100%;
   border: 1px solid hsl(0, 0%, 0%, 0.04);
   transition: 0.3s;
+  min-width: 100%;
+  aspect-ratio: 1;
   @media (min-width: 768px) {
     border-radius: 0.5rem;
   }
@@ -54,7 +56,16 @@ export default function Component({
 }) {
   return (
     <BlockAlbum href={link} target="blank">
-      <ArtWork src={artwork} />
+      <picture style={{ fontSize: 0 }}>
+        <source
+          srcSet={artwork.replace("{w}x{h}bb.jpeg", "256x256bb.webp")}
+          type="image/webp"
+        ></source>
+        <ArtWork
+          src={artwork.replace("{w}x{h}bb.jpeg", "256x256bb.jpeg")}
+          alt={name}
+        />
+      </picture>
       <Name>{name}</Name>
       <Artist>{artist}</Artist>
       <YearAndGenre>

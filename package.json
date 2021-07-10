@@ -5,7 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "analyze": "ANALYZE=true npm build"
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^11.0.1",
