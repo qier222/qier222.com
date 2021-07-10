@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components"
 import Avatar from "components/avatar"
 import SocialMediaList from "components/social-media-list"
 import Divider from "components/divider"
-import SvgUnderline from "public/assets/svg/underline.svg"
+import SvgUnderline from "public/svg/underline.svg"
 import { AppContext } from "store"
 
 const HeroSection = styled.div`

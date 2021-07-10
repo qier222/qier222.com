@@ -3,12 +3,12 @@ import styled from "styled-components"
 import sample from "lodash.sample"
 
 const videos = [
-  "assets/videos/elderbrook-live-in-aquarium.mp4",
-  "assets/videos/porter-robinson-nurture-live.mp4",
-  "assets/videos/san-holo-mixed-feelings-2.mp4",
-  "assets/videos/louis-the-child-candy-ii.mp4",
-  "assets/videos/party-pupils-dim-mak.mp4",
-  "assets/videos/tchami-dr-fresch-digital-mirage.mp4",
+  "videos/elderbrook-live-in-aquarium.mp4",
+  "videos/porter-robinson-nurture-live.mp4",
+  "videos/san-holo-mixed-feelings-2.mp4",
+  "videos/louis-the-child-candy-ii.mp4",
+  "videos/party-pupils-dim-mak.mp4",
+  "videos/tchami-dr-fresch-digital-mirage.mp4",
 ]
 
 const BlockMusicStayVibrant = styled.a`

@@ -3,7 +3,7 @@ import styled from "styled-components"
 import Color from "color"
 import Cookies from "js-cookie"
 
-import SpotifyLogoSvg from "public/assets/svg/spotify-logo.svg"
+import SpotifyLogoSvg from "public/svg/spotify-logo.svg"
 import { supabase } from "utils/supabase"
 
 const BlockMusicNowPlaying = styled.a`

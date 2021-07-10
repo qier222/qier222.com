@@ -55,7 +55,7 @@ export default function Component() {
     <OuterCircle>
       <InnerCircle hue={hue}>
         <Image
-          src="/assets/images/avatar.png"
+          src="/images/avatar.png"
           alt="avatar"
           height={54}
           width={54}
