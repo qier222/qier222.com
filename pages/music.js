@@ -11,7 +11,7 @@ export default function Component() {
     <NoSSRWrapper>
       <App>
         <Head>
-          <title>qier222</title>
+          <title>Music Collection - qier222</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"

@@ -10,7 +10,7 @@ export default function Home(props) {
   return (
     <App {...props}>
       <Head>
-        <title>qier222</title>
+        <title>qier222 - Front-end Developer</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta name="description" content="qier222's personal website" />
       </Head>
