@@ -47,44 +47,36 @@ const getAlbumsDetail = albums => {
 }
 
 module.exports = async (req, res) => {
-  await spotifyApi
-    .refreshAccessToken()
-    .then(data => {
-      spotifyApi.setAccessToken(data.body.access_token)
-      return spotifyApi.getPlaylist(process.env.SPOTIFY_PLAYLIST_ID)
+  const {
+    body: { access_token: token },
+  } = await spotifyApi.refreshAccessToken()
+  spotifyApi.setAccessToken(token)
+
+  const { body: playlist } = await spotifyApi.getPlaylist(
+    process.env.SPOTIFY_PLAYLIST_ID
+  )
+  const spotifyAlbums = []
+  playlist.tracks.items.map(({ track }) => {
+    spotifyAlbums.push({
+      artist: track.artists[0].name,
+      album: track.album.name,
+      spotify_album_id: track.album.id,
     })
-    .then(data => {
-      const tracks = data.body.tracks.items
-      console.log(`Total album count: ${tracks.length}`)
-      const albums = []
-      tracks.map(({ track }) => {
-        albums.push({
-          artist: track.artists[0].name,
-          album: track.album.name,
-          spotify_album_id: track.album.id,
-        })
-      })
-      return getAlbumsDetail(albums)
-    })
-    .then(async albums => {
-      console.log("updating supabase")
-      const { data: albumsInSupabase } = await supabase
-        .from("albums")
-        .select("*")
-      const filteredAlbums = albums.filter(album => {
-        if (
-          albumsInSupabase.find(
-            a => a.spotify_album_id === album.spotify_album_id
-          ) === undefined
-        )
-          return album
-      })
-      const { data, error } = await supabase
-        .from("albums")
-        .insert(filteredAlbums)
-      console.log(data)
-      console.log({ error })
-    })
+  })
+
+  const albums = await getAlbumsDetail(spotifyAlbums)
+  console.log("updating supabase")
+  const { data: albumsInSupabase } = await supabase.from("albums").select("*")
+  const filteredAlbums = albums.filter(album => {
+    const isAlbumInSupabase =
+      albumsInSupabase.find(
+        a => a.spotify_album_id === album.spotify_album_id
+      ) === undefined
+    if (isAlbumInSupabase) return album
+  })
+  const { data, error } = await supabase.from("albums").insert(filteredAlbums)
+  console.log({ newAlbums: data })
+  console.log({ error })
 
   res.status(200).send(`OK`)
 }

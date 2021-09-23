@@ -15,34 +15,35 @@ const supabase = createClient(
 )
 
 const getNowPlaying = async () => {
-  return spotifyApi.getMyCurrentPlayingTrack().then(async response => {
-    if (response.body.item === undefined) return
-    const track = response.body.item
-    await Vibrant.from(track.album.images[2].url)
-      .getPalette()
-      .then(palette => {
-        const color = Color.rgb(palette?.DarkVibrant?.getRgb()).string()
-        return supabase
-          .from("spotify_now_playing")
-          .update({
-            name: track.name,
-            artist: track.artists[0].name,
-            album: track.album.name,
-            artwork_url: track.album.images[1].url,
-            spotify_id: track.id,
-            timestamp: new Date().getTime(),
-            color,
-          })
-          .eq("id", "1")
-      })
-    console.log(`Now playing 👉 ${track.name} by ${track.artists[0].name}`)
-  })
+  const {
+    body: { item: track },
+  } = await spotifyApi.getMyCurrentPlayingTrack()
+  if (!track) return
+
+  const palette = await Vibrant.from(track.album.images[2].url).getPalette()
+  const color = Color.rgb(palette?.DarkVibrant?.getRgb()).string()
+
+  await supabase
+    .from("spotify_now_playing")
+    .update({
+      name: track.name,
+      artist: track.artists[0].name,
+      album: track.album.name,
+      artwork_url: track.album.images[1].url,
+      spotify_id: track.id,
+      timestamp: new Date().getTime(),
+      color,
+    })
+    .eq("id", "1")
+
+  console.log(`Now playing 👉 ${track.name} by ${track.artists[0].name}`)
 }
 
 module.exports = async (req, res) => {
-  await spotifyApi.refreshAccessToken().then(async data => {
-    spotifyApi.setAccessToken(data.body.access_token)
-    await getNowPlaying()
-  })
+  const {
+    body: { access_token: token },
+  } = await spotifyApi.refreshAccessToken()
+  spotifyApi.setAccessToken(token)
+  await getNowPlaying()
   res.status(200).send(`OK`)
 }
