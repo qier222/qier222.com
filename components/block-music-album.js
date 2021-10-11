@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
+import { formatArtworkUrl } from "utils/common"
 
 const BlockAlbum = styled.a`
   display: block;
@@ -58,13 +59,10 @@ export default function Component({
     <BlockAlbum href={link} target="blank">
       <picture style={{ fontSize: 0 }}>
         <source
-          srcSet={artwork.replace("{w}x{h}bb.jpeg", "256x256bb.webp")}
+          srcSet={formatArtworkUrl(artwork, "webp")}
           type="image/webp"
         ></source>
-        <ArtWork
-          src={artwork.replace("{w}x{h}bb.jpeg", "256x256bb.jpeg")}
-          alt={name}
-        />
+        <ArtWork src={formatArtworkUrl(artwork)} alt={name} />
       </picture>
       <Name>{name}</Name>
       <Artist>{artist}</Artist>

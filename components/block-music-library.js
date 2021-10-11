@@ -5,6 +5,7 @@ import Link from "next/link"
 
 import { supabase } from "utils/supabase"
 import { AppContext } from "store"
+import { formatArtworkUrl } from "utils/common"
 
 const CoverWrapper = styled.div`
   display: grid;
@@ -107,17 +108,11 @@ export default function Component(props) {
               style={{ gridArea: `album${index + 1}`, fontSize: 0 }}
             >
               <source
-                srcSet={album.artwork_url.replace(
-                  "{w}x{h}bb.jpeg",
-                  "256x256bb.webp"
-                )}
+                srcSet={formatArtworkUrl(album.artwork_url, "webp")}
                 type="image/webp"
               ></source>
               <Cover
-                src={album.artwork_url.replace(
-                  "{w}x{h}bb.jpeg",
-                  "256x256bb.jpeg"
-                )}
+                src={formatArtworkUrl(album.artwork_url)}
                 big={index < 3}
                 alt={album.name}
               />
