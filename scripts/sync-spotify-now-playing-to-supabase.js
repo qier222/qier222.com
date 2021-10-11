@@ -39,11 +39,16 @@ const getNowPlaying = async () => {
   console.log(`Now playing 👉 ${track.name} by ${track.artists[0].name}`)
 }
 
-module.exports = async (req, res) => {
+const main = async () => {
   const {
     body: { access_token: token },
   } = await spotifyApi.refreshAccessToken()
   spotifyApi.setAccessToken(token)
   await getNowPlaying()
-  res.status(200).send(`OK`)
 }
+
+if (require.main === module) {
+  main()
+}
+
+module.exports = main

@@ -46,7 +46,7 @@ const getAlbumsDetail = albums => {
   return Promise.all(requests)
 }
 
-module.exports = async (req, res) => {
+const main = async () => {
   const {
     body: { access_token: token },
   } = await spotifyApi.refreshAccessToken()
@@ -77,6 +77,10 @@ module.exports = async (req, res) => {
   const { data, error } = await supabase.from("albums").insert(filteredAlbums)
   console.log({ newAlbums: data })
   console.log({ error })
-
-  res.status(200).send(`OK`)
 }
+
+if (require.main === module) {
+  main()
+}
+
+module.exports = main
