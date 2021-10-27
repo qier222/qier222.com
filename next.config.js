@@ -24,6 +24,9 @@ module.exports = withBundleAnalyzer({
     locales: ["en-US"],
     defaultLocale: "en-US",
   },
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async rewrites() {
     return [
       {
